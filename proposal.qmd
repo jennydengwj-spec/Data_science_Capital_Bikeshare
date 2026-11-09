@@ -10,8 +10,6 @@ execute:
   message: false
 ---
 
-# Proposal
-
 ## Our Purpose
 
 Washington, DC has spent years expanding Capital Bikeshare and its bike lane network, and DDOT's planning documents explicitly weigh ridership and revenue against equity and access when deciding where new stations and lanes go. Yet it remains unclear whether these public investments reach neighborhoods evenly. This project asks: **how do neighborhood socioeconomic characteristics and bicycle infrastructure availability relate to Capital Bikeshare usage and accessibility across Washington, DC?** Throughout, we use the 2020 census tract as our operational definition of a "neighborhood."

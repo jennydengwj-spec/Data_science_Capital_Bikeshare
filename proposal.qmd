@@ -10,37 +10,32 @@ execute:
   message: false
 ---
 
-## Proposal
+# Proposal
 
+## Our Purpose
 
-## Motivation
+Washington, DC has spent years expanding Capital Bikeshare and its bike lane network, and DDOT's planning documents explicitly weigh ridership and revenue against equity and access when deciding where new stations and lanes go. Yet it remains unclear whether these public investments reach neighborhoods evenly. This project asks: **how do neighborhood socioeconomic characteristics and bicycle infrastructure availability relate to Capital Bikeshare usage and accessibility across Washington, DC?** Throughout, we use the 2020 census tract as our operational definition of a "neighborhood."
 
+By linking June 2024 trip records, official Capital Bikeshare station locations, DDOT's bicycle lane inventory, and 2020–2024 ACS 5-year tract-level estimates, we examine (1) whether lower-income tracts have less access to bikeshare stations and bike lanes, (2) how infrastructure availability is associated with observed ridership, and (3) which tracts combine low access, low income, and low usage and may therefore deserve priority consideration in future investment decisions.
 
+The findings could help the District Department of Transportation identify potential gaps in bikeshare coverage and evaluate where additional bicycle infrastructure or shared mobility services may warrant consideration. By distinguishing observed ridership from infrastructure accessibility, the project seeks to contribute to a more equitable approach to transportation investment.
 
-
-## Data Sources
-
-We plan to integrate five data sources. 
-
-First, [Capital Bikeshare Trip History](https://capitalbikeshare.com/system-data) provides individual bicycle trip records from January through March 2024, including trip timestamps, geographic coordinates, and membership types.
-
-Second, [MWCOG Capital Bikeshare Docking Stations](https://gis.mwcog.org/wa/rest/services/Hosted/ExistingSystem/MapServer/18) provides January 2024 station locations for measuring bikeshare accessibility. 
-
-Third, [MWCOG DC Bicycle Lanes](https://gis.mwcog.org/wa/rest/services/Hosted/DC_Bicycle_Lanes_(January_2024)/FeatureServer) provides January 2024 bicycle infrastructure locations and characteristics. Fourth, the [2019–2023 American Community Survey (ACS) 5-Year Estimates](https://www.census.gov/data/developers/data-sets/acs-5year/2023.html) provide census tract-level socioeconomic characteristics, including median household income and population.
-
-We may also incorporate [MWCOG DC Bike Trails (January 2024)](https://gis.mwcog.org/wa/rest/services/Hosted/DC_Bike_Trails_(January_2024)/FeatureServer) to account for off-street bicycle infrastructure that is not captured by the bicycle lane inventory.
-
-Finally, [Census Tract Boundaries](https://walker-data.com/tidycensus/articles/spatial-data.html) will be obtained using the `tidycensus` package to geographically integrate the datasets.
-
+## Data-sources
 
 ## Methodology
 
+## Technical hurdles
 
+We anticipate five main technical challenges:
 
+1.  **Spatial integration.** Joining trip coordinates, lane geometries, station points, and tract polygons requires consistent projections and careful handling of segments that cross tract boundaries. Tracts near the DC boundary also need stations from neighboring jurisdictions to avoid edge effects.
 
-## Technical Hurdles
+2.  **Data volume.** A single summer month contains several hundred thousand trips. We will aggregate before performing spatial joins and cache intermediate results to keep the workflow reproducible and fast.
 
-We anticipate three major technical challenges. First, integrating datasets with different geographic units will require spatial joins between trip-level coordinates, station locations, bicycle lane geometries, and census tract boundaries, along with consistent coordinate reference systems. Second, temporal differences across datasets may affect comparability: bikeshare trips cover January through March 2024, station and bicycle infrastructure data represent January 2024 conditions, and ACS estimates reflect socioeconomic characteristics from 2019 to 2023. Changes in infrastructure during the study period may introduce measurement errors. Third, missing station identifiers, unavailable socioeconomic estimates, and seasonal variation in ridership may complicate the analysis. We will assess these limitations and interpret observed relationships as associations rather than causal effects.
+3.  **Dockless e-bike trips.** Electric bikes can be picked up and left outside stations, so these trips have no station identifier and often have lower-precision coordinates. This is the main source of missing station IDs, and we will handle these trips separately rather than dropping them.
 
+4.  **Temporal mismatch.** The ACS estimates cover 2020–2024, the bike lane inventory reflects its most recent update rather than June 2024, and June ridership reflects peak-season, tourism-heavy conditions. Where possible we will use lane installation dates to exclude facilities built after June 2024, and we will avoid generalizing results to the full year.
 
-The `echo: false` option disables the printing of code (only output is displayed).
+5.  **Missing and incomplete attributes.** Some ACS estimates (especially median income) are missing or have large margins of error in small tracts, and some bike lane attributes, such as facility type, are blank or not applicable. We will document the exclusion and imputation rules described above and group unclassified lanes into an "other" category.
+
+We will document these limitations and interpret observed relationships as associations rather than causal effects.

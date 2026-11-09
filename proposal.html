@@ -2196,14 +2196,14 @@ vertical-align: -.125em;
 </header>
 
 
-<section id="proposal" class="level2">
-<h2 class="anchored" data-anchor-id="proposal">Proposal</h2>
-</section>
-<section id="motivation" class="level2">
-<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<section id="our-purpose" class="level2">
+<h2 class="anchored" data-anchor-id="our-purpose">Our Purpose</h2>
+<p>Washington, DC has spent years expanding Capital Bikeshare and its bike lane network, and DDOT’s planning documents explicitly weigh ridership and revenue against equity and access when planning bikeshare expansion. Yet it remains unclear whether access to these transportation resources differs systematically across neighborhoods. This project asks: <strong>How do neighborhood socioeconomic characteristics and bicycle infrastructure availability relate to Capital Bikeshare usage and accessibility across Washington, DC?</strong> Throughout, we use 2020 census tracts as our operational definition of “neighborhoods.”</p>
+<p>By linking Capital Bikeshare trip records from January through March 2024, MWCOG’s January 2024 bikeshare station locations and bicycle lane inventory, and 2019–2023 ACS 5-year tract-level estimates, we examine (1) whether lower-income tracts have less access to bikeshare stations and bike lanes, (2) how infrastructure availability is associated with observed ridership, and (3) which lower-income tracts have limited infrastructure access and low observed ridership, potentially warranting further evaluation for future transportation investments.</p>
+<p>The findings could help the District Department of Transportation identify potential gaps in bikeshare accessibility and evaluate where additional bicycle infrastructure or shared mobility services may be needed. By distinguishing observed ridership from infrastructure accessibility, the project seeks to inform more equitable transportation planning and public infrastructure investment decisions.</p>
 </section>
 <section id="data-sources" class="level2">
-<h2 class="anchored" data-anchor-id="data-sources">Data Sources</h2>
+<h2 class="anchored" data-anchor-id="data-sources">Data-sources</h2>
 <p>We plan to integrate five data sources.</p>
 <p>First, <a href="https://capitalbikeshare.com/system-data">Capital Bikeshare Trip History</a> provides individual bicycle trip records from January through March 2024, including trip timestamps, geographic coordinates, and membership types.</p>
 <p>Second, <a href="https://gis.mwcog.org/wa/rest/services/Hosted/ExistingSystem/MapServer/18">MWCOG Capital Bikeshare Docking Stations</a> provides January 2024 station locations for measuring bikeshare accessibility.</p>
@@ -2215,9 +2215,10 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
 </section>
 <section id="technical-hurdles" class="level2">
-<h2 class="anchored" data-anchor-id="technical-hurdles">Technical Hurdles</h2>
-<p>We anticipate three major technical challenges. First, integrating datasets with different geographic units will require spatial joins between trip-level coordinates, station locations, bicycle lane geometries, and census tract boundaries, along with consistent coordinate reference systems. Second, temporal differences across datasets may affect comparability: bikeshare trips cover January through March 2024, station and bicycle infrastructure data represent January 2024 conditions, and ACS estimates reflect socioeconomic characteristics from 2019 to 2023. Changes in infrastructure during the study period may introduce measurement errors. Third, missing station identifiers, unavailable socioeconomic estimates, and seasonal variation in ridership may complicate the analysis. We will assess these limitations and interpret observed relationships as associations rather than causal effects.</p>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
+<h2 class="anchored" data-anchor-id="technical-hurdles">Technical hurdles</h2>
+<p>We anticipate three main technical challenges. First, spatial integration and computational efficiency will require linking large volumes of trip-level coordinates, bikeshare station locations, bicycle lane geometries, and census tract boundaries using consistent coordinate reference systems. We will also need to account for bicycle lane segments crossing tract boundaries and stations located near DC’s borders. To manage computational demands, we plan to aggregate spatially matched trips at the census tract level and cache intermediate results.</p>
+<p>Second, temporal alignment may affect comparability across datasets. Capital Bikeshare trip records cover January through March 2024, while MWCOG’s station and bicycle infrastructure data represent January 2024 conditions, and ACS estimates reflect socioeconomic characteristics from 2019 to 2023. Infrastructure changes during the study period and seasonal variation in ridership may influence our findings, limiting their generalizability to other months.</p>
+<p>Third, missing and incomplete data may complicate the analysis. Some bikeshare trips lack station identifiers, potentially including dockless e-bike trips, while some ACS income estimates are missing or have substantial margins of error. Additionally, missing bicycle lane attributes may indicate inapplicable facility types rather than incomplete reporting. We will examine missingness patterns, document data-cleaning and classification decisions, and use available geographic coordinates where appropriate. We will interpret observed relationships as associations rather than causal effects.</p>
 </section>
 
 </main>

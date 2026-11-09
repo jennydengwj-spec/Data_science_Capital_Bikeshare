@@ -12,19 +12,35 @@ execute:
 
 ## Proposal
 
-## Running Code
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Motivation
 
-```{r}
-1 + 1
-```
 
-You can add options to executable code like this
 
-```{r}
-#| echo: false
-2 * 2
-```
+
+## Data Sources
+
+We plan to integrate five data sources. 
+
+First, [Capital Bikeshare Trip History](https://capitalbikeshare.com/system-data) provides individual bicycle trip records from January through March 2024, including trip timestamps, geographic coordinates, and membership types.
+
+Second, [MWCOG Capital Bikeshare Docking Stations](https://gis.mwcog.org/wa/rest/services/Hosted/ExistingSystem/MapServer/18) provides January 2024 station locations for measuring bikeshare accessibility. 
+
+Third, [MWCOG DC Bicycle Lanes](https://gis.mwcog.org/wa/rest/services/Hosted/DC_Bicycle_Lanes_(January_2024)/FeatureServer) provides January 2024 bicycle infrastructure locations and characteristics. Fourth, the [2019–2023 American Community Survey (ACS) 5-Year Estimates](https://www.census.gov/data/developers/data-sets/acs-5year/2023.html) provide census tract-level socioeconomic characteristics, including median household income and population.
+
+We may also incorporate [MWCOG DC Bike Trails (January 2024)](https://gis.mwcog.org/wa/rest/services/Hosted/DC_Bike_Trails_(January_2024)/FeatureServer) to account for off-street bicycle infrastructure that is not captured by the bicycle lane inventory.
+
+Finally, [Census Tract Boundaries](https://walker-data.com/tidycensus/articles/spatial-data.html) will be obtained using the `tidycensus` package to geographically integrate the datasets.
+
+
+## Methodology
+
+
+
+
+## Technical Hurdles
+
+We anticipate three major technical challenges. First, integrating datasets with different geographic units will require spatial joins between trip-level coordinates, station locations, bicycle lane geometries, and census tract boundaries, along with consistent coordinate reference systems. Second, temporal differences across datasets may affect comparability: bikeshare trips cover January through March 2024, station and bicycle infrastructure data represent January 2024 conditions, and ACS estimates reflect socioeconomic characteristics from 2019 to 2023. Changes in infrastructure during the study period may introduce measurement errors. Third, missing station identifiers, unavailable socioeconomic estimates, and seasonal variation in ridership may complicate the analysis. We will assess these limitations and interpret observed relationships as associations rather than causal effects.
+
 
 The `echo: false` option disables the printing of code (only output is displayed).

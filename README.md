@@ -1,9 +1,7 @@
 # Data_science_Capital_Bikeshare
 Transportation equity and Capital Bikeshare usage in Washington, DC
 
-# Who Does Capital Bikeshare Reach? Predicting Neighborhood Ridership to Find Where Use Falls Short
-
-Georgetown University — Data Science final project (Fall 2026)
+Data Science final project (Fall 2026)
 Team: Itzu Lin, Wenjie Deng, Rui Dong
 
 ## About
